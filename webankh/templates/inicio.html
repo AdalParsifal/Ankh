@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Ankh{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">
+        {% if idioma == 'en' %}
+            Welcome to Ankh, a space of knowledge and fraternity.
+        {% elif idioma == 'fr' %}
+            Bienvenue à Ankh, un espace de connaissance et de fraternité.
+        {% else %}
+            Bienvenido a Ankh, un espacio de conocimiento y fraternidad.
+        {% endif %}
+    </h1>
+
+    <p class="lead">
+        {% if idioma == 'en' %}
+            Explore our publications, access the library, or learn more about Freemasonry in Chile.
+        {% elif idioma == 'fr' %}
+            Explorez nos publications, accédez à la bibliothèque ou apprenez-en plus sur la franc-maçonnerie au Chili.
+        {% else %}
+            Explora nuestras publicaciones, accede a la biblioteca o aprende más sobre la masonería en Chile.
+        {% endif %}
+    </p>
+</div>
+{% endblock %}

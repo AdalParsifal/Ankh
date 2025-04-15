@@ -11,3 +11,6 @@ def bienvenida(request):
         return redirect('inicio')  # Asumimos que tenés una vista "inicio"
 
     return render(request, 'bienvenida.html')
+
+def inicio(request):
+    return render(request, 'inicio.html')
