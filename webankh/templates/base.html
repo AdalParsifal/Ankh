@@ -52,11 +52,13 @@
 
                 <!-- Secciones mutables (placeholder) -->
                 <ul class="navbar-nav">
-                    {% block mutable_navbar %}
-                    <!-- Ejemplo de uso:
-                    <li class="nav-item"><a class="nav-link" href="#">¿Quieres ser masón?</a></li>
-                    -->
-                    {% endblock %}
+                    {% if es_mason %}
+                        <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Perfil</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="#">{% if idioma == 'en' %}Want to be a Mason?{% elif idioma == 'fr' %}Voulez-vous être Maçon ?{% else %}¿Quieres ser masón?{% endif %}</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
