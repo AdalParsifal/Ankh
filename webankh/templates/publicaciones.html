@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Publicaciones - Ankh{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Publicaciones</h1>
+
+{% for pub in publicaciones %}
+    <div class="card mb-4">
+        {% if pub.imagen_destacada %}
+            <img src="{{ pub.imagen_destacada.url }}" class="card-img-top" alt="Imagen de {{ pub.titulo }}">
+        {% endif %}
+        <div class="card-body">
+            <h3 class="card-title">{{ pub.titulo }}</h3>
+            <p class="card-text">{{ pub.contenido|safe }}</p>
+            <p class="text-muted">
+                <small>    
+                    Publicado por {{ pub.autor.username }} 
+                    ({{ pub.autor.perfilusuario.get_grado_display }}) 
+                    el {{ pub.fecha_publicacion|date:"d M Y H:i" }}
+                </small></p>
+        </div>
+    </div>
+{% empty %}
+    <p>No hay publicaciones disponibles todavía.</p>
+{% endfor %}
+{% endblock %}
