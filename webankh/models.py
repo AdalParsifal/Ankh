@@ -36,5 +36,16 @@ class Publicacion(models.Model):
 
     def __str__(self):
         return self.titulo
+class Noticia(models.Model):
+    titulo = models.CharField(max_length=200)
+    contenido = models.TextField()
+    fecha_publicacion = models.DateTimeField(default=timezone.now)
+    imagen = models.ImageField(upload_to='noticias/', null=True, blank=True)
+    autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
+    class Meta:
+        ordering = ['-fecha_publicacion']
+
+    def __str__(self):
+        return self.titulo
 
