@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import Publicacion
 
 def bienvenida(request):
     if request.method == 'POST':
@@ -19,7 +20,8 @@ def nosotros(request):
     return render(request, 'nosotros.html')
 
 def publicaciones(request):
-    return render(request, 'publicaciones.html')
+    publicaciones = Publicacion.objects.all()
+    return render(request, 'publicaciones.html', {'publicaciones': publicaciones})
 
 def faq(request):
     return render(request, 'faq.html')
