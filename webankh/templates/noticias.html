@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Noticias - Ankh{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Noticias</h1>
+
+{% for noticia in noticias %}
+    <div class="card mb-4">
+        {% if noticia.imagen %}
+            <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="Imagen de {{ noticia.titulo }}">
+        {% endif %}
+        <div class="card-body">
+            <h4 class="card-title">{{ noticia.titulo }}</h4>
+            <p class="card-text">{{ noticia.contenido }}</p>
+            <p class="text-muted">
+                <small>
+                    Publicado por {{ noticia.autor.username }} 
+                    ({{ noticia.autor.perfilusuario.get_grado_display }}) 
+                    el {{ noticia.fecha_publicacion|date:"d M Y H:i" }}
+                </small>
+            </p>
+        </div>
+    </div>
+{% empty %}
+    <p>No hay noticias aún.</p>
+{% endfor %}
+{% endblock %}

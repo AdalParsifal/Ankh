@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Publicacion
+from .models import Publicacion, Noticia
 
 def bienvenida(request):
     if request.method == 'POST':
@@ -33,4 +33,5 @@ def biblioteca(request):
     return render(request, 'biblioteca.html')
 
 def noticias(request):
-    return render(request, 'noticias.html')
+    noticias = Noticia.objects.all()
+    return render(request, 'noticias.html', {'noticias': noticias})
