@@ -7,7 +7,7 @@ class PerfilUsuario(models.Model):
     GRADOS = [
         ('visitante', 'Visitante'),
         ('aprendiz', 'Aprendiz'),
-        ('compañero', 'Compañero')
+        ('compañero', 'Compañero'),
         ('maestro', 'Maestro'),
     ]
 
