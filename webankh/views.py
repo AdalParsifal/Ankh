@@ -48,7 +48,7 @@ def register(request):
             user = form.save(commit=False)
             user.is_active = False  # ← Espera aprobación
             user.save()
-            PerfilUsuario.objects.create(usuario=user)  # Ya lo hace el signal
+            # PerfilUsuario.objects.create(usuario=user) # NO crear el perfil manualmente, ya lo hace el signal
             return render(request, 'registro_enviado.html')
     else:
         form = UserCreationForm()
