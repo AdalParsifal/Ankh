@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Publicacion, Noticia
+from .models import Publicacion, Noticia, PerfilUsuario
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def bienvenida(request):
     if request.method == 'POST':
@@ -35,3 +37,20 @@ def biblioteca(request):
 def noticias(request):
     noticias = Noticia.objects.all()
     return render(request, 'noticias.html', {'noticias': noticias})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # El perfil se crea automáticamente con el signal
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+@login_required
+def perfil(request):
+    perfil = request.user.perfilusuario
+    return render(request, 'perfil.html', {'perfil': perfil})
