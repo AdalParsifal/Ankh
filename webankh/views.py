@@ -43,9 +43,11 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            # El perfil se crea automáticamente con el signal
-            return redirect('login')
+            user = form.save(commit=False)
+            user.is_active = False  # ← Espera aprobación
+            user.save()
+            PerfilUsuario.objects.create(usuario=user)  # Ya lo hace el signal
+            return render(request, 'registro_enviado.html')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
