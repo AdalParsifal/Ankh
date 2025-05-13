@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Publicacion, Noticia, PerfilUsuario
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
 
 def bienvenida(request):
     if request.method == 'POST':
@@ -56,3 +58,16 @@ def register(request):
 def perfil(request):
     perfil = request.user.perfilusuario
     return render(request, 'perfil.html', {'perfil': perfil})
+
+@staff_member_required
+def panel_admin(request):
+    pendientes = User.objects.filter(is_active=False)
+    usuarios = User.objects.filter(is_active=True).order_by('date_joined')
+    return render(request, 'panel_admin.html', {'pendientes': pendientes, 'usuarios': usuarios})
+
+@staff_member_required
+def aprobar_usuario(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.is_active = True
+    user.save()
+    return redirect('panel_admin')

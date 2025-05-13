@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Panel de administración</h2>
+
+<h3>Solicitudes de registro</h3>
+<ul>
+  {% for u in pendientes %}
+    <li>{{ u.username }} - {{ u.email }}
+      <a href="{% url 'aprobar_usuario' u.id %}">Aprobar</a>
+    </li>
+  {% empty %}
+    <li>No hay solicitudes pendientes</li>
+  {% endfor %}
+</ul>
+
+<h3>Usuarios activos</h3>
+<ul>
+  {% for u in usuarios %}
+    <li>{{ u.username }} - Grado: {{ u.perfilusuario.get_grado_display }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
