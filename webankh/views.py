@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
+from .forms import LoginForm
 
 def bienvenida(request):
     if request.method == 'POST':
@@ -53,6 +55,10 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    authentication_form = LoginForm
+    template_name = 'login.html'
 
 @login_required
 def perfil(request):
