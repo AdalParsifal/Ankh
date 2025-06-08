@@ -6,6 +6,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm
+import inspect
+
 
 def bienvenida(request):
     if request.method == 'POST':
@@ -56,6 +58,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
+print(">> LoginForm viene de:", inspect.getfile(LoginForm))
 class CustomLoginView(LoginView):
     authentication_form = LoginForm
     template_name = 'login.html'
