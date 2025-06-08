@@ -62,7 +62,9 @@ print(">> LoginForm viene de:", inspect.getfile(LoginForm))
 class CustomLoginView(LoginView):
     authentication_form = LoginForm
     template_name = 'login.html'
-
+    def dispatch(self, request, *args, **kwargs):
+        print(">>> Vista de login personalizada ejecutada")
+        return super().dispatch(request, *args, **kwargs)
 @login_required
 def perfil(request):
     perfil = request.user.perfilusuario

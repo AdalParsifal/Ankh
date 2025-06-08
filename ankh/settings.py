@@ -16,7 +16,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/perfil/'
 LOGOUT_REDIRECT_URL = '/'
 # Quick-start development settings - unsuitable for production
@@ -104,7 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTHENTICATION_BACKENDS = [
+    'webankh.backends.InactiveUserLoginBackend',
+]
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
